@@ -11,4 +11,5 @@ public class Client {
     private int numberOfOrders;
     private float personalDiscount;
     private PhoneNumber phoneNumber;
+    private User user;
 }
