@@ -6,16 +6,34 @@
     <title>Title</title>
 </head>
 <style>
+    body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+    }
+
     ul {
         list-style-type: none;
-        display : flex;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        background-color: #4caf50;
     }
+
     li {
-        padding: 30px;
+        padding: 10px 20px;
     }
+
     a {
-        color: #000 !important;
-        text-decoration: none
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    a:hover {
+        color: #ddd;
     }
 </style>
 <header style="background: #D3D3D3">
@@ -23,14 +41,17 @@
         <ul>
             <li><strong>Pizzeria_RBD</strong></li>
             <li sec:authorize="!isAuthenticated()"><a href="/login">Log-in</a></li>
-            <li><a href="/client/create">Registation</a></li>
-            <li><a href="/order/product">Products</a></li>
-            <li sec:authorize="isAuthenticated()"><a href="/order/create">Create order</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/order">Orders</a></li>
-            <li sec:authorize="isAuthenticated()" ><a href="/client">Clients</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/courier">Couriers</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/support">Supports</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/order/create/product">Create product</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/client/create">Registration</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')"><a href="/ingredient">Ingredient</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/department">Department</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/post">Post</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/client">Pizzeria Employee</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/courier">Client</a></li>
+            <li><a href="/dish">Dish</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/order/create/product">Order</a></li>
+            <li sec:authorize="hasAuthority('USER')" ><a href="/order/create/product">My Orders</a></li>
+            <li sec:authorize="hasAuthority('USER')" ><a href="/courier">Profile</a></li>
+            <li sec:authorize="isAuthenticated()" ><a href="/logout">Logout</a></li>
         </ul>
     </nav>
 </header>

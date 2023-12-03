@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+<form th:action="@{'/ingredient/byId'}" method="get">
+    <label for="id">ID</label>
+    <input type="number" name="id" id="id">
+    <button type="submit">Search</button>
+</form>
+<form th:action="@{/ingredient/create}" method="get">
+    <button type="submit">Create New</button>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="oneIngredient: ${ingredients}">
+        <td th:text="${oneIngredient.idIngredient}"></td>
+        <td th:text="${oneIngredient.name}"></td>
+        <td th:text="${oneIngredient.quantity}"></td>
+        <td>
+            <form th:action="${'/ingredient/update/' + oneIngredient.idIngredient}" method="get">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="${'/ingredient/delete/' + oneIngredient.idIngredient}" method="get">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

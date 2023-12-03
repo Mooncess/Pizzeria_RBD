@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS ingredient (
 CREATE TABLE IF NOT EXISTS orders_has_dish (
   `dish_id_dish` INT NOT NULL,
   `order_id_order` INT NOT NULL,
-
+  PRIMARY KEY (`dish_id_dish`, `order_id_order`),
   FOREIGN KEY (`dish_id_dish`) REFERENCES dish(`id_dish`),
   FOREIGN KEY (`order_id_order`) REFERENCES orders(`id_order`)
 );
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS orders_has_dish (
 CREATE TABLE IF NOT EXISTS ingredient_has_dish (
   `ingredient_id_ingredient` INT NOT NULL,
   `dish_id_dish` INT NOT NULL,
-
+  PRIMARY KEY (`ingredient_id_ingredient`, `dish_id_dish`),
   FOREIGN KEY (`ingredient_id_ingredient`) REFERENCES ingredient(`id_ingredient`),
   FOREIGN KEY (`dish_id_dish`) REFERENCES dish(`id_dish`)
 );
