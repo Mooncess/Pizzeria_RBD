@@ -54,7 +54,6 @@ public class DepartmentController {
     @PostMapping("/update/{id}")
     public String updateDepartment(@PathVariable Integer id, Department department){
         department.setIdDepartment(id);
-        System.out.println(department.getNameOfDepartment());
         departmentService.updateDepartment(department);
         return "redirect:/department/byId/" + id;
     }

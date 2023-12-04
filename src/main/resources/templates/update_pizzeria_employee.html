@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        select option {
+            background-color: #fff;
+            color: #000;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+<form th:action="@{'/pizzeria_employee/update/' + ${onePizzeriaEmployee.idPizzeriaEmployee}}" method="post">
+    <p>Post</p>
+    <select name="nameOfPost">
+        <option th:each="d : ${postList}" th:value="${d.idPost}"><p th:text="${d.nameOfPost}"></p></option>
+    </select><br>
+    <label for="firstName">First Name
+        <input type="text" name="firstName" id="firstName" th:value="${onePizzeriaEmployee.firstName}"/>
+    </label><br>
+    <label for="lastName">Last Name
+        <input type="text" name="lastName" id="lastName" th:value="${onePizzeriaEmployee.lastName}"/>
+    </label><br>
+    <label for="surname">Surname
+        <input type="text" name="surname" id="surname" th:value="${onePizzeriaEmployee.surname}"/>
+    </label><br>
+    <label for="phoneNumber">Phone Number
+        <input type="text" name="phoneNumber" id="phoneNumber" th:value="${onePizzeriaEmployee.phoneNumber}"/>
+    </label><br>
+    <label for="dateOfEmployment">Date Of Employment
+        <input type="text" name="dateOfEmployment" id="dateOfEmployment" placeholder="yyyy-MM-dd" th:value="${onePizzeriaEmployee.dateOfEmployment}"/>
+    </label><br>
+    <label for="dateOfDismissal">Date Of Dismissal
+        <input type="text" name="dateOfDismissal" id="dateOfDismissal" placeholder="yyyy-MM-dd" th:value="${onePizzeriaEmployee.dateOfDismissal}"/>
+    </label><br>
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

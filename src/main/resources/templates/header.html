@@ -45,10 +45,10 @@
             <li sec:authorize="hasAuthority('ADMIN')"><a href="/ingredient">Ingredient</a></li>
             <li sec:authorize="hasAuthority('ADMIN')" ><a href="/department">Department</a></li>
             <li sec:authorize="hasAuthority('ADMIN')" ><a href="/post">Post</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/client">Pizzeria Employee</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/courier">Client</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/pizzeria_employee">Pizzeria Employee</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/client">Client</a></li>
             <li><a href="/dish">Dish</a></li>
-            <li sec:authorize="hasAuthority('ADMIN')" ><a href="/order/create/product">Order</a></li>
+            <li sec:authorize="hasAuthority('ADMIN')"><a href="/order/create/product">Order</a></li>
             <li sec:authorize="hasAuthority('USER')" ><a href="/order/create/product">My Orders</a></li>
             <li sec:authorize="hasAuthority('USER')" ><a href="/courier">Profile</a></li>
             <li sec:authorize="isAuthenticated()" ><a href="/logout">Logout</a></li>

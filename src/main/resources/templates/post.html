@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+<form th:action="@{'/post/byId'}" method="get">
+    <label for="id">ID</label>
+    <input type="number" name="id" id="id">
+    <button type="submit">Search</button>
+</form>
+<form th:action="@{/post/create}" method="get">
+    <button type="submit">Create New</button>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Salary</th>
+        <th>Department</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr>
+        <td th:text="${onePost.idPost}"></td>
+        <td th:text="${onePost.nameOfPost}"></td>
+        <td th:text="${onePost.salary}"></td>
+        <td th:text="${onePost.nameOfDepartment}"></td>
+        <td>
+            <form th:action="${'/post/update/' + onePost.idPost}" method="get">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="${'/post/delete/' + onePost.idPost}" method="get">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

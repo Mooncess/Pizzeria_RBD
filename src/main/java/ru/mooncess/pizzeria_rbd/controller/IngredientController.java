@@ -54,7 +54,6 @@ public class IngredientController {
     @PostMapping("/update/{id}")
     public String updateIngredient(@PathVariable Integer id, Ingredient ingredient){
         ingredient.setIdIngredient(id);
-        System.out.println(ingredient.toString());
         ingredientService.updateIngredient(ingredient);
         return "redirect:/ingredient/byId/" + id;
     }

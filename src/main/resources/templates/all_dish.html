@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+<form sec:authorize="hasAuthority('ADMIN')" th:action="@{/dish/admin}" method="get">
+    <button type="submit">ADMIN MODE</button>
+</form>
+<form th:action="@{/save}" method="post">
+<table>
+    <tr>
+        <th>ADD TO ORDER</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Ingredients</th>
+    </tr>
+    <tr th:each="oneDish: ${dishs}">
+        <td>
+            <label>
+                <input type="checkbox" th:id="${oneDish.idDish}" th:name="selectedDishes" th:value="${oneDish.idDish}" />
+            </label>
+        </td>
+        <td th:text="${oneDish.idDish}"></td>
+        <td th:text="${oneDish.description}"></td>
+        <td th:text="${oneDish.cost}"></td>
+        <td th:text="${oneDish.ingredientList}"></td>
+    </tr>
+</table>
+    <button type="submit">Заказать</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+<form th:action="@{'/pizzeria_employee/byId'}" method="get">
+    <label for="id">ID</label>
+    <input type="number" name="id" id="id">
+    <button type="submit">Search</button>
+</form>
+<form th:action="@{/pizzeria_employee/create}" method="get">
+    <button type="submit">Create New</button>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Post</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Surname</th>
+        <th>Phone Number</th>
+        <th>Date Of Employment</th>
+        <th>Employment Status</th>
+        <th>Date Of Dismissal</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="onePizzeriaEmployee: ${pizzeriaEmployees}">
+        <td th:text="${onePizzeriaEmployee.idPizzeriaEmployee}"></td>
+        <td th:text="${onePizzeriaEmployee.nameOfPost}"></td>
+        <td th:text="${onePizzeriaEmployee.firstName}"></td>
+        <td th:text="${onePizzeriaEmployee.lastName}"></td>
+        <td th:text="${onePizzeriaEmployee.surname}"></td>
+        <td th:text="${onePizzeriaEmployee.phoneNumber}"></td>
+        <td th:text="${onePizzeriaEmployee.dateOfEmployment}"></td>
+        <td th:text="${onePizzeriaEmployee.employmentStatus}"></td>
+        <td th:text="${onePizzeriaEmployee.dateOfDismissal}"></td>
+        <td>
+            <form th:action="${'/pizzeria_employee/update/' + onePizzeriaEmployee.idPizzeriaEmployee}" method="get">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="${'/pizzeria_employee/delete/' + onePizzeriaEmployee.idPizzeriaEmployee}" method="get">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

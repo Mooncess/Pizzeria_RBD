@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        select option {
+            background-color: #fff;
+            color: #000;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{header.html}"></div>
+<form th:action="@{/post/create}" method="post">
+    <label for="nameOfPost">Name
+        <input type="text" name="nameOfPost" id="nameOfPost"/>
+    </label><br>
+    <label for="salary">Salary
+        <input type="number" name="salary" id="salary"/>
+    </label><br>
+    <p>Department</p>
+    <select name="department">
+        <option th:each="d : ${departmentList}" th:value="${d.idDepartment}"><p th:text="${d.nameOfDepartment}"></p></option>
+    </select><br>
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>
