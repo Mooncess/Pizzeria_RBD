@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DefController {
     @GetMapping("/")
     public String getDefault(){
-        return "redirect:/client/create";
+        return "redirect:/dish";
     }
 }

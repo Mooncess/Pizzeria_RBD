@@ -24,7 +24,7 @@
 <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/dish/admin}" method="get">
     <button type="submit">ADMIN MODE</button>
 </form>
-<form th:action="@{/save}" method="post">
+<form th:action="@{/order/create}" method="post">
 <table>
     <tr>
         <th>ADD TO ORDER</th>
@@ -45,7 +45,9 @@
         <td th:text="${oneDish.ingredientList}"></td>
     </tr>
 </table>
-    <button type="submit">Заказать</button>
+    <label for="description">Описание</label>
+    <input type="text" name="description" id="description">
+    <button sec:authorize="isAuthenticated()" type="submit">Заказать</button>
 </form>
 </body>
 </html>

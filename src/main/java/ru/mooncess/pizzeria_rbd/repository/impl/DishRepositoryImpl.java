@@ -94,4 +94,17 @@ public class DishRepositoryImpl implements DishRepository {
         String sql = "DELETE FROM dish WHERE id_dish = ?";
         jdbcTemplate.update(sql, id);
     }
+    @Override
+    public int calcTotalCost(List<Integer> selectedDishes) {
+        int totalCost = 0;
+        for (int i : selectedDishes) {
+            DishDto dishDto = jdbcTemplate.queryForObject(
+                    "SELECT cost " +
+                            "FROM dish " +
+                            "WHERE id_dish = ?;",
+                    new Object[]{i}, new BeanPropertyRowMapper<>(DishDto.class));
+            totalCost+=dishDto.getCost();
+        }
+        return totalCost;
+    }
 }

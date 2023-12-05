@@ -32,5 +32,7 @@ public class DishService {
     public void deleteDishById(Integer id){
         dishRepository.deleteDishById(id);
     }
-
+    public int calcTotalCost(List<Integer> selectedDishes) {
+        return dishRepository.calcTotalCost(selectedDishes);
+    }
 }

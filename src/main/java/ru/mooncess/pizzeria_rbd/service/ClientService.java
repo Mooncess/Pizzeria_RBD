@@ -3,6 +3,7 @@ package ru.mooncess.pizzeria_rbd.service;
 
 import org.springframework.stereotype.Service;
 import ru.mooncess.pizzeria_rbd.dto.ClientCreateDto;
+import ru.mooncess.pizzeria_rbd.dto.ClientDto;
 import ru.mooncess.pizzeria_rbd.entity.Client;
 import ru.mooncess.pizzeria_rbd.entity.Role;
 import ru.mooncess.pizzeria_rbd.entity.User;
@@ -19,11 +20,14 @@ public class ClientService {
         this.clientRepository = clientRepository;
         this.userService = userService;
     }
-    public List<Client> getAllClients(){
+    public List<ClientDto> getAllClients(){
         return clientRepository.getAllClients();
     }
-    public Client getClientById(int id){
+    public ClientDto getClientById(int id){
         return clientRepository.getClientById(id);
+    }
+    public ClientDto getClientByUserId(Long id){
+        return clientRepository.getClientByUserId(id);
     }
     public void createClient(ClientCreateDto client){
         User user = new User();
@@ -33,7 +37,7 @@ public class ClientService {
         client.userId = userService.createUser(user);
         clientRepository.createClient(client);
     }
-    public void updateClient(Client client){
+    public void updateClient(ClientDto client){
         clientRepository.updateClient(client);
     }
     public void deleteClientById(Integer id){

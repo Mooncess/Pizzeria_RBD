@@ -12,4 +12,5 @@ public interface DishRepository {
     void createDish(DishDto dish);
     void updateDish(DishDto dish);
     void deleteDishById(Integer id);
+    int calcTotalCost(List<Integer> selectedDishes);
 }

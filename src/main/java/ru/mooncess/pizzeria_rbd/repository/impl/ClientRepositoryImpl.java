@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import ru.mooncess.pizzeria_rbd.dto.ClientCreateDto;
+import ru.mooncess.pizzeria_rbd.dto.ClientDto;
 import ru.mooncess.pizzeria_rbd.entity.Client;
 import ru.mooncess.pizzeria_rbd.entity.User;
 import ru.mooncess.pizzeria_rbd.repository.ClientRepository;
@@ -20,45 +21,39 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public List<Client> getAllClients() {
-        String sql = "SELECT * FROM client";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Client.class));
+    public List<ClientDto> getAllClients() {
+        String sql = "SELECT * FROM client " +
+                "JOIN full_name ON client.full_name_id_full_name = full_name.id_full_name " +
+                "JOIN phone_number ON client.phone_number_id_phone_number = phone_number.id_phone_number;";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ClientDto.class));
     }
 
     @Override
-    public Client getClientById(Integer id) {
-        String sql = "SELECT * FROM client WHERE id_client = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Client.class));
+    public ClientDto getClientById(Integer id) {
+        String sql = "SELECT * FROM client " +
+                "JOIN full_name ON client.full_name_id_full_name = full_name.id_full_name " +
+                "JOIN phone_number ON client.phone_number_id_phone_number = phone_number.id_phone_number WHERE id_client = ?;";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(ClientDto.class));
+    }
+
+    @Override
+    public ClientDto getClientByUserId(Long id) {
+        String sql = "SELECT * FROM client " +
+                "JOIN full_name ON client.full_name_id_full_name = full_name.id_full_name " +
+                "JOIN phone_number ON client.phone_number_id_phone_number = phone_number.id_phone_number WHERE user_id_user = ?;";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(ClientDto.class));
     }
 
     @Override
     public void createClient(ClientCreateDto client) {
-        String sql1 = "INSERT INTO full_name (`first_name`, `last_name`, `surname`) " +
-                "VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql1, client.firstName, client.lastName, client.surname);
-        System.out.println(client.surname);
-        int fnId = jdbcTemplate.queryForObject("SELECT id_full_name FROM full_name WHERE first_name = '" +
-                client.firstName + "' AND last_name = '" +
-                client.lastName + "' AND surname = '" +
-                client.surname + "'", Integer.class);
-
-        String sql2 = "INSERT INTO phone_number (`phone_number`)" +
-                "VALUES (?)";
-        jdbcTemplate.update(sql2, client.phoneNumber);
-        int phId = jdbcTemplate.queryForObject("SELECT id_phone_number FROM phone_number WHERE phone_number = " + client.phoneNumber, Integer.class);
-
-
-        String sql = "INSERT INTO client (full_name_id_full_name, number_of_orders, personal_discount, phone_number_id_phone_number, user_id_user) " +
-                "VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, fnId, 0, 0, phId, client.userId);
+        String sql = "CALL CreateClient(?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, client.firstName, client.lastName, client.surname, client.phoneNumber, client.userId);
     }
 
     @Override
-    public void updateClient(Client client) {
-        String sql = "UPDATE client SET full_name_id_full_name = ?, number_of_orders = ?, personal_discount = ?, " +
-                "phone_number_id_phone_number = ? WHERE id_client = ?";
-        jdbcTemplate.update(sql, client.getFullName().getIdFullName(), client.getNumberOfOrders(),
-                client.getPersonalDiscount(), client.getPhoneNumber().getIdPhoneNumber(), client.getIdClient());
+    public void updateClient(ClientDto client) {
+        String sql = "CALL UpdateClient(?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, client.idClient, client.firstName, client.lastName, client.surname, client.phoneNumber);
     }
 
     @Override

@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS orders (
   `total_cost` INT NOT NULL,
   `status_of_order_id_status_of_order` INT NOT NULL,
   `date_of_creation` DATETIME NOT NULL,
-  `pizzeria_employee_id_pizzeria_employee` INT NOT NULL,
+  `pizzeria_employee_id_pizzeria_employee` INT,
 
   FOREIGN KEY (`client_id_client`) REFERENCES client(`id_client`),
   FOREIGN KEY (`status_of_order_id_status_of_order`) REFERENCES status_of_order(`id_status_of_order`),

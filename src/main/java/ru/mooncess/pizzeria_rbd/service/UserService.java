@@ -29,5 +29,9 @@ public class UserService implements UserDetailsService {
         userRepository.createUser(user);
         return userRepository.loadIdByUsername(user.getUsername());
     }
+
+    public Long loadIdByUsername(String username) {
+        return userRepository.loadIdByUsername(username);
+    }
 }
 
