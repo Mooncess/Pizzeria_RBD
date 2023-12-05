@@ -29,6 +29,7 @@
         <th>Phone Number</th>
         <th>Number Of Orders</th>
         <th>Personal Discount</th>
+        <th>Update</th>
     </tr>
     <tr>
         <td th:text="${oneClient.firstName}"></td>
@@ -37,6 +38,11 @@
         <td th:text="${oneClient.phoneNumber}"></td>
         <td th:text="${oneClient.numberOfOrders}"></td>
         <td th:text="${oneClient.personalDiscount}"></td>
+        <td>
+            <form th:action="${'/client/update/' + oneClient.idClient}" method="get">
+                <button type="submit">Update</button>
+            </form>
+        </td>
     </tr>
 </table>
 </body>

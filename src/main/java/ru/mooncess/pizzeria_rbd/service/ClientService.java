@@ -49,5 +49,8 @@ public class ClientService {
     public List<Client> orderBy(String field, String asc){
         return clientRepository.orderBy(field, asc);
     }
+    public void updateNumberOrders(int clientId) {
+        clientRepository.updateNumberOrders(clientId);
+    }
 }
 

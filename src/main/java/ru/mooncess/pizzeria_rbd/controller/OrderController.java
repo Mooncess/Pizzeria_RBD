@@ -39,7 +39,7 @@ public class OrderController {
     public String getMyOrder(Model model, Authentication authentication){
         Long userId = userService.loadIdByUsername(authentication.getName());
         model.addAttribute("orders", orderService.getAllOrdersByClientId(clientService.getClientByUserId(userId).idClient));
-        return "all_order";
+        return "my_order";
     }
     @GetMapping("byId")
     public String getOrderById(@RequestParam Integer id, Model model){
@@ -66,6 +66,7 @@ public class OrderController {
         String currentDate = dateFormat.format(new Date());
         order.dateOfCreation = currentDate;
         orderService.createOrder(order);
+        clientService.updateNumberOrders(order.clientIdClient);
         return "redirect:/order/my_order";
     }
     @GetMapping("/update/{id}")

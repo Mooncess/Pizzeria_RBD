@@ -16,5 +16,6 @@ public interface ClientRepository {
     void deleteClientById(Integer id);
     void deleteAllClients();
     List<Client> orderBy(String field, String asc);
+    void updateNumberOrders(int clientId);
 }
 

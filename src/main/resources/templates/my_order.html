@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-
+<div th:insert="~{header.html}"></div>
+<form th:action="@{'/order/byId'}" method="get">
+    <label for="id">ID</label>
+    <input type="number" name="id" id="id">
+    <button type="submit">Search</button>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Total Cost</th>
+        <th>Status</th>
+        <th>Date Of Creation;</th>
+    </tr>
+    <tr th:each="oneOrder: ${orders}">
+        <td th:text="${oneOrder.idOrder}"></td>
+        <td th:text="${oneOrder.description}"></td>
+        <td th:text="${oneOrder.totalCost}"></td>
+        <td th:text="${oneOrder.status}"></td>
+        <td th:text="${oneOrder.dateOfCreation}"></td>
+    </tr>
+</table>
 </body>
 </html>

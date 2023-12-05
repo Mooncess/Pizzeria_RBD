@@ -73,4 +73,10 @@ public class ClientRepositoryImpl implements ClientRepository {
         String sql = "SELECT * FROM client ORDER BY " + field + " " + asc;
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Client.class));
     }
+
+    @Override
+    public void updateNumberOrders(int clientId) {
+        String sql = "UPDATE client SET number_of_orders = number_of_orders + 1 WHERE id_client = ?";
+        jdbcTemplate.update(sql, clientId);
+    }
 }
